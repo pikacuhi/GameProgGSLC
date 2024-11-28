@@ -27,37 +27,47 @@ public class ColliderManage : MonoBehaviour
                 manager.currTomato++;
                 Debug.Log("curr tomato =" + manager.currTomato);
                 Destroy(gameObject);
-            }else if(gameObject.CompareTag("Cow") || gameObject.CompareTag("Chicken"))
+            }
+            
+            if(gameObject.CompareTag("Cow") || gameObject.CompareTag("Chicken"))
             {
                 pm.healt -= 1;
                 
-
-                if(pm.healt <= 0) { SceneManager.LoadScene(4); }
-            }  
+            }
+            if (pm.healt <= 0) { SceneManager.LoadScene(4); }
 
         }
 
         if (manager.currCorn >= manager.maxCorn &&
-            manager.currTomato >= manager.maxTomato)
+            manager.currTomato >= manager.maxTomato && SceneManager.GetActiveScene().name =="SampleScene")
         {
-            manager.maxCorn += 2;
-            manager.maxTomato += 2;
+            //manager.maxCorn += 2;
+            //manager.maxTomato += 2;
             manager.currCorn = 0;
             manager.currTomato = 0; 
-            Debug.Log(manager.maxCorn);
+            //Debug.Log("corn max" +manager.maxCorn + "tomato max" + manager.maxTomato);
             manager.ChangeScene("lvl2");
             Destroy(gameObject);
         }
 
-        if(manager.currCorn >= manager.maxCorn &&
-            manager.currTomato >= manager.maxTomato && SceneManager.GetActiveScene().name == "lvl2"){
-            manager.ChangeScene("lvl3");
+        if(manager.currCorn >= 4 &&
+            manager.currTomato >= 4 && SceneManager.GetActiveScene().name == "lvl2"){
             manager.currCorn = 0;
             manager.currTomato = 0;
+            //manager.maxCorn += 2;
+            //manager.maxTomato += 2;
+            manager.ChangeScene("lvl3");
             Destroy(gameObject);
         }
 
-        
+        if (manager.currCorn >= 6 &&
+    manager.currTomato >= 6 && SceneManager.GetActiveScene().name == "lvl3")
+        {
+            manager.ChangeScene("Finish");
+            Destroy(gameObject);
+        }
+
+
 
     }
    

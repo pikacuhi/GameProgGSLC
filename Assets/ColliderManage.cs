@@ -30,18 +30,30 @@ public class ColliderManage : MonoBehaviour
             }else if(gameObject.CompareTag("Cow") || gameObject.CompareTag("Chicken"))
             {
                 pm.healt -= 1;
+                
 
                 if(pm.healt <= 0) { SceneManager.LoadScene(4); }
             }  
 
         }
 
-        if (manager.currCorn == manager.maxCorn &&
-            manager.currTomato == manager.maxTomato)
+        if (manager.currCorn >= manager.maxCorn &&
+            manager.currTomato >= manager.maxTomato)
         {
             manager.maxCorn += 2;
             manager.maxTomato += 2;
+            manager.currCorn = 0;
+            manager.currTomato = 0; 
+            Debug.Log(manager.maxCorn);
             manager.ChangeScene("lvl2");
+            Destroy(gameObject);
+        }
+
+        if(manager.currCorn >= manager.maxCorn &&
+            manager.currTomato >= manager.maxTomato && SceneManager.GetActiveScene().name == "lvl2"){
+            manager.ChangeScene("lvl3");
+            manager.currCorn = 0;
+            manager.currTomato = 0;
             Destroy(gameObject);
         }
 
